@@ -6,40 +6,34 @@
   <meta name="theme-color" content="#e7657a">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="Svatební checklist">
-  <meta name="description" content="Mobilní svatební checklist pro nevěstu a ženicha.">
+  <meta name="apple-mobile-web-app-title" content="Svatební koordinace">
+  <meta name="description" content="Elegantní svatební koordinace pro plánování úkolů, termínu a rozpočtu.">
   <link rel="manifest" href="./manifest.json">
   <link rel="apple-touch-icon" href="./icons/icon-180.png">
   <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
   <link rel="stylesheet" href="./styles.css">
-  <title>Svatební checklist</title>
+  <title>Svatební koordinace</title>
 </head>
 <body>
   <div class="app-shell">
     <header class="hero">
       <div class="hero__content">
         <p class="eyebrow">By - Fotograf Lukáš Vintr</p>
-        <h1>Svatební checklist</h1>
-        <p class="hero__text">Naplánujte si svůj velký den přehledně, v klidu a s jistotou, že máte všechny důležité kroky vždy po ruce.</p>
+        <h1>Svatební koordinace</h1>
+        <p class="hero__text">Naplánujte si svůj velký den přehledně, v&nbsp;klidu a&nbsp;s&nbsp;jistotou, že máte všechny důležité kroky vždy&nbsp;po&nbsp;ruce.</p>
         <section class="countdown-card" aria-label="Odpočet do svatby">
           <div class="countdown-card__copy">
-            <p class="countdown-card__label">Datum svatby</p>
-            <h2 id="countdownHeadline">Zadejte termín svého dne</h2>
-            <p id="countdownText">Jakmile vyberete datum, aplikace začne okamžitě odpočítávat dny do svatby.</p>
+            <p class="countdown-card__label">Odpočet do svatby</p>
+            <h2 id="countdownHeadline">Vyberte datum svého dne</h2>
+            <p id="countdownText">Jakmile nastavíte termín, aplikace začne automaticky odpočítávat zbývající dny.</p>
           </div>
           <div class="countdown-card__controls">
-            <label for="weddingDateInput">Vyberte datum</label>
-            <input id="weddingDateInput" type="date">
-            <div class="countdown-metrics" aria-live="polite">
-              <article class="countdown-metric">
-                <strong id="countdownDays">--</strong>
-                <span>dní</span>
-              </article>
-              <article class="countdown-metric">
-                <strong id="countdownWeeks">--</strong>
-                <span>týdnů</span>
-              </article>
-            </div>
+            <button class="button button--secondary countdown-card__button" id="weddingDateButton" type="button">Vybrat datum svatby</button>
+            <input id="weddingDateInput" type="date" hidden>
+            <article class="countdown-metric" aria-live="polite">
+              <strong id="countdownDays">--</strong>
+              <span>dní do svatby</span>
+            </article>
           </div>
         </section>
       </div>
@@ -48,44 +42,18 @@
           <div class="art-glow art-glow--left"></div>
           <div class="art-glow art-glow--right"></div>
           <div class="art-frame">
-            <div class="art-arch"></div>
-            <div class="art-drape art-drape--left"></div>
-            <div class="art-drape art-drape--right"></div>
-            <div class="art-flowers art-flowers--left">
-              <span></span><span></span><span></span><span></span>
+            <div class="ring ring--left"></div>
+            <div class="ring ring--right"></div>
+            <div class="date-plaque">
+              <span class="date-plaque__label">Datum svatby</span>
+              <strong class="date-plaque__value" id="weddingDateDisplay">Vyberte termín</strong>
             </div>
-            <div class="art-flowers art-flowers--right">
-              <span></span><span></span><span></span><span></span>
-            </div>
-            <div class="art-couple">
-              <div class="person person--bride">
-                <span class="person__head"></span>
-                <span class="person__body"></span>
-              </div>
-              <div class="person person--groom">
-                <span class="person__head"></span>
-                <span class="person__body"></span>
-              </div>
-            </div>
-            <div class="art-rings">
-              <span></span>
-              <span></span>
-            </div>
-            <div class="art-heart"></div>
           </div>
         </div>
       </div>
     </header>
 
-    <section class="install-card" id="installCard" hidden>
-      <div>
-        <h2>Přidat na plochu</h2>
-        <p id="installText">Nainstalujte si aplikaci pro rychlý přístup i offline.</p>
-      </div>
-      <button class="button button--primary" id="installButton" type="button">Nainstalovat</button>
-    </section>
-
-    <section class="stats-grid" aria-label="Přehled postupu">
+    <section class="stats-grid" aria-label="Přehled postupu a rozpočtu">
       <article class="stat-card stat-card--highlight">
         <p>Celkem hotovo</p>
         <strong id="overallProgress">0 z 0</strong>
@@ -94,22 +62,38 @@
         </div>
       </article>
       <article class="stat-card">
-        <p>Nevěsta</p>
-        <strong id="brideProgress">0 %</strong>
-        <span id="brideSummary">0 z 0 úkolů</span>
+        <p>Rozpočet svatby</p>
+        <strong id="budgetTotalDisplay">0 Kč</strong>
+        <span id="budgetSpentSummary">Utraceno 0 Kč</span>
       </article>
       <article class="stat-card">
-        <p>Ženich</p>
-        <strong id="groomProgress">0 %</strong>
-        <span id="groomSummary">0 z 0 úkolů</span>
+        <p>Zbývá v rozpočtu</p>
+        <strong id="budgetRemainingDisplay">0 Kč</strong>
+        <span id="budgetStatusText">Zadejte rozpočet a průběžné výdaje.</span>
+      </article>
+    </section>
+
+    <section class="budget-panel">
+      <article class="detail-card">
+        <div class="section-heading">
+          <h2>Rozpočet</h2>
+          <p>Hlídání financí na jednom místě</p>
+        </div>
+        <form id="budgetForm" class="budget-form">
+          <div class="filter-group">
+            <label for="budgetTotalInput">Celkový rozpočet</label>
+            <input id="budgetTotalInput" type="number" min="0" step="1" inputmode="numeric" placeholder="Například 250000">
+          </div>
+          <div class="filter-group">
+            <label for="budgetSpentInput">Už utraceno</label>
+            <input id="budgetSpentInput" type="number" min="0" step="1" inputmode="numeric" placeholder="Například 78000">
+          </div>
+          <button class="button button--primary button--full" type="submit">Uložit rozpočet</button>
+        </form>
       </article>
     </section>
 
     <section class="controls">
-      <div class="filter-group">
-        <label for="ownerFilter">Kdo</label>
-        <select id="ownerFilter"></select>
-      </div>
       <div class="filter-group">
         <label for="categoryFilter">Kategorie</label>
         <select id="categoryFilter"></select>
@@ -149,7 +133,7 @@
           <p class="detail-meta" id="detailMeta"></p>
           <p class="detail-description" id="detailDescription">Tady se zobrazí popis a poznámky k vybranému úkolu.</p>
           <label class="notes-label" for="notesInput">Poznámky</label>
-          <textarea id="notesInput" rows="5" placeholder="Sem si můžete napsat termín, kontakt nebo rozpočet..."></textarea>
+          <textarea id="notesInput" rows="5" placeholder="Sem si můžete napsat termín, kontakt nebo poznámku..."></textarea>
           <div class="detail-actions">
             <button class="button button--primary" id="saveNotesButton" type="button">Uložit poznámku</button>
             <button class="button button--danger" id="deleteTaskButton" type="button">Smazat úkol</button>
@@ -167,13 +151,6 @@
 
             <label for="newCategory">Kategorie</label>
             <input id="newCategory" name="category" type="text" placeholder="Například Krása">
-
-            <label for="newOwner">Na starosti</label>
-            <select id="newOwner" name="owner">
-              <option value="Nevěsta">Nevěsta</option>
-              <option value="Ženich">Ženich</option>
-              <option value="Společně" selected>Společně</option>
-            </select>
 
             <label for="newDescription">Popis</label>
             <textarea id="newDescription" name="description" rows="4" placeholder="Krátký popis, co je potřeba zařídit."></textarea>

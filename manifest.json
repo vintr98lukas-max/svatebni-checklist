@@ -1,7 +1,7 @@
 {
-  "name": "Svatební checklist",
-  "short_name": "Checklist",
-  "description": "Mobilní PWA checklist pro nevěstu a ženicha.",
+  "name": "Svatební koordinace",
+  "short_name": "Koordinace",
+  "description": "Elegantní svatební koordinace pro plánování úkolů, termínu a rozpočtu.",
   "id": "/",
   "start_url": "/",
   "scope": "/",
