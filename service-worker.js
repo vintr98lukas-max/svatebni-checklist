@@ -1,7 +1,8 @@
-const CACHE_NAME = "svatebni-checklist-pwa-v1";
+const CACHE_NAME = "svatebni-checklist-pwa-v2";
 const ASSETS = [
   "./",
   "./index.html",
+  "./offline.html",
   "./styles.css",
   "./app.js",
   "./manifest.json",
@@ -27,6 +28,23 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
 
+  if (event.request.mode === "navigate") {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put("./index.html", copy));
+          return response;
+        })
+        .catch(async () => {
+          const cachedPage = await caches.match("./index.html");
+          if (cachedPage) return cachedPage;
+          return caches.match("./offline.html");
+        })
+    );
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request).then((cached) => {
       if (cached) return cached;
@@ -41,7 +59,7 @@ self.addEventListener("fetch", (event) => {
           caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
           return response;
         })
-        .catch(() => caches.match("./index.html"));
+        .catch(() => caches.match("./offline.html"));
     })
   );
 });

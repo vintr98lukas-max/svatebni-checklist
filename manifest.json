@@ -2,12 +2,15 @@
   "name": "Svatební checklist",
   "short_name": "Checklist",
   "description": "Mobilní PWA checklist pro nevěstu a ženicha.",
+  "id": "/",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
   "background_color": "#fff8f3",
   "theme_color": "#e7657a",
   "orientation": "portrait",
+  "categories": ["lifestyle", "productivity", "wedding"],
   "icons": [
     {
       "src": "./icons/icon-192.png",

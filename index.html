@@ -18,25 +18,60 @@
   <div class="app-shell">
     <header class="hero">
       <div class="hero__content">
-        <p class="eyebrow">Svatba na pohodu</p>
+        <p class="eyebrow">By - Fotograf Lukáš Vintr</p>
         <h1>Svatební checklist</h1>
-        <p class="hero__text">Mobile-first přehled úkolů pro nevěstu a ženicha. Velká tlačítka, rychlé odškrtávání a poznámky vždy po ruce.</p>
-        <div class="hero__badges" aria-hidden="true">
-          <span class="badge badge--pink">Nevěsta</span>
-          <span class="badge badge--gold">Společně</span>
-          <span class="badge badge--mint">Ženich</span>
-        </div>
+        <p class="hero__text">Naplánujte si svůj velký den přehledně, v klidu a s jistotou, že máte všechny důležité kroky vždy po ruce.</p>
+        <section class="countdown-card" aria-label="Odpočet do svatby">
+          <div class="countdown-card__copy">
+            <p class="countdown-card__label">Datum svatby</p>
+            <h2 id="countdownHeadline">Zadejte termín svého dne</h2>
+            <p id="countdownText">Jakmile vyberete datum, aplikace začne okamžitě odpočítávat dny do svatby.</p>
+          </div>
+          <div class="countdown-card__controls">
+            <label for="weddingDateInput">Vyberte datum</label>
+            <input id="weddingDateInput" type="date">
+            <div class="countdown-metrics" aria-live="polite">
+              <article class="countdown-metric">
+                <strong id="countdownDays">--</strong>
+                <span>dní</span>
+              </article>
+              <article class="countdown-metric">
+                <strong id="countdownWeeks">--</strong>
+                <span>týdnů</span>
+              </article>
+            </div>
+          </div>
+        </section>
       </div>
       <div class="hero__art" aria-hidden="true">
-        <div class="art-card art-card--back"></div>
-        <div class="art-card art-card--front">
-          <div class="heart"></div>
-          <div class="rings">
-            <span></span>
-            <span></span>
-          </div>
-          <div class="bouquet">
-            <i></i><i></i><i></i><i></i>
+        <div class="art-scene">
+          <div class="art-glow art-glow--left"></div>
+          <div class="art-glow art-glow--right"></div>
+          <div class="art-frame">
+            <div class="art-arch"></div>
+            <div class="art-drape art-drape--left"></div>
+            <div class="art-drape art-drape--right"></div>
+            <div class="art-flowers art-flowers--left">
+              <span></span><span></span><span></span><span></span>
+            </div>
+            <div class="art-flowers art-flowers--right">
+              <span></span><span></span><span></span><span></span>
+            </div>
+            <div class="art-couple">
+              <div class="person person--bride">
+                <span class="person__head"></span>
+                <span class="person__body"></span>
+              </div>
+              <div class="person person--groom">
+                <span class="person__head"></span>
+                <span class="person__body"></span>
+              </div>
+            </div>
+            <div class="art-rings">
+              <span></span>
+              <span></span>
+            </div>
+            <div class="art-heart"></div>
           </div>
         </div>
       </div>

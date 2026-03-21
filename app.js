@@ -1,4 +1,5 @@
 const STORAGE_KEY = "svatebni-checklist-pwa-v1";
+const WEDDING_DATE_KEY = "svatebni-checklist-wedding-date";
 
 const DEFAULT_TASKS = [
   { id: "budget", title: "Stanovit celkový rozpočet", category: "Plánování", owner: "Společně", description: "Ujasněte si rozpočet na hostinu, oblečení, dekorace, hudbu i rezervy.", notes: "", done: false },
@@ -26,7 +27,8 @@ const DEFAULT_TASKS = [
 const state = {
   tasks: loadTasks(),
   selectedId: null,
-  filters: { owner: "Všichni", category: "Všechny kategorie", status: "all" }
+  filters: { owner: "Všichni", category: "Všechny kategorie", status: "all" },
+  weddingDate: loadWeddingDate()
 };
 
 const els = {
@@ -60,7 +62,12 @@ const els = {
   installCard: document.querySelector("#installCard"),
   installButton: document.querySelector("#installButton"),
   installText: document.querySelector("#installText"),
-  taskItemTemplate: document.querySelector("#taskItemTemplate")
+  taskItemTemplate: document.querySelector("#taskItemTemplate"),
+  weddingDateInput: document.querySelector("#weddingDateInput"),
+  countdownHeadline: document.querySelector("#countdownHeadline"),
+  countdownText: document.querySelector("#countdownText"),
+  countdownDays: document.querySelector("#countdownDays"),
+  countdownWeeks: document.querySelector("#countdownWeeks")
 };
 
 let deferredPrompt = null;
@@ -88,6 +95,20 @@ function loadTasks() {
 
 function saveTasks() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state.tasks));
+}
+
+function loadWeddingDate() {
+  const saved = localStorage.getItem(WEDDING_DATE_KEY);
+  return saved && /^\d{4}-\d{2}-\d{2}$/.test(saved) ? saved : "";
+}
+
+function saveWeddingDate() {
+  if (state.weddingDate) {
+    localStorage.setItem(WEDDING_DATE_KEY, state.weddingDate);
+    return;
+  }
+
+  localStorage.removeItem(WEDDING_DATE_KEY);
 }
 
 function fillFilterOptions() {
@@ -177,12 +198,19 @@ function bindEvents() {
     deferredPrompt = null;
     els.installCard.hidden = true;
   });
+
+  els.weddingDateInput.addEventListener("change", () => {
+    state.weddingDate = els.weddingDateInput.value;
+    saveWeddingDate();
+    renderCountdown();
+  });
 }
 
 function render() {
   renderTaskList();
   renderDetail();
   renderStats();
+  renderCountdown();
 }
 
 function renderTaskList() {
@@ -264,6 +292,55 @@ function getSelectedTask() {
   return state.tasks.find((task) => task.id === state.selectedId) ?? null;
 }
 
+function renderCountdown() {
+  els.weddingDateInput.value = state.weddingDate;
+
+  if (!state.weddingDate) {
+    els.countdownHeadline.textContent = "Zadejte termín svého dne";
+    els.countdownText.textContent = "Jakmile vyberete datum, aplikace začne okamžitě odpočítávat dny do svatby.";
+    els.countdownDays.textContent = "--";
+    els.countdownWeeks.textContent = "--";
+    return;
+  }
+
+  const today = new Date();
+  const now = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  const [year, month, day] = state.weddingDate.split("-").map(Number);
+  const weddingDate = new Date(year, month - 1, day);
+  const diffMs = weddingDate.getTime() - now.getTime();
+  const diffDays = Math.ceil(diffMs / 86400000);
+  const diffWeeks = diffDays >= 0 ? Math.floor(diffDays / 7) : Math.ceil(diffDays / 7);
+  const formattedDate = weddingDate.toLocaleDateString("cs-CZ", {
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  });
+
+  if (diffDays > 0) {
+    els.countdownHeadline.textContent = `Do svatby zbývá ${formatUnit(diffDays, "den", "dny", "dní")}`;
+    els.countdownText.textContent = `Velký den připadá na ${formattedDate}. Každý splněný úkol vás teď posouvá o krok blíž.`;
+  } else if (diffDays === 0) {
+    els.countdownHeadline.textContent = "Svatební den je právě dnes";
+    els.countdownText.textContent = `Dnes je ${formattedDate}. Užijte si svůj den naplno a bez stresu.`;
+  } else {
+    const elapsed = Math.abs(diffDays);
+    els.countdownHeadline.textContent = `Od svatby uplynulo ${formatUnit(elapsed, "den", "dny", "dní")}`;
+    els.countdownText.textContent = `Svatební den proběhl ${formattedDate}. Checklist vám může zůstat jako milá vzpomínka na přípravy.`;
+  }
+
+  els.countdownDays.textContent = String(Math.abs(diffDays));
+  els.countdownWeeks.textContent = String(Math.abs(diffWeeks));
+}
+
+function formatUnit(value, one, few, many) {
+  const mod10 = value % 10;
+  const mod100 = value % 100;
+
+  if (mod10 === 1 && mod100 !== 11) return `${value} ${one}`;
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return `${value} ${few}`;
+  return `${value} ${many}`;
+}
+
 function registerServiceWorker() {
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
@@ -275,11 +352,22 @@ function registerServiceWorker() {
 function setupInstallPrompt() {
   const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent);
   const isInStandalone = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone;
+  const isSecure = window.isSecureContext;
 
   if (isIos && !isInStandalone) {
     els.installCard.hidden = false;
     els.installButton.hidden = true;
-    els.installText.textContent = "Na iPhonu otevřete Sdílet a zvolte „Přidat na plochu“.";
+    els.installText.textContent = isSecure
+      ? "Na iPhonu Apple nepovoluje vlastní instalační tlačítko. Otevřete stránku v Safari, klepněte na Sdílet a zvolte „Přidat na plochu“. Po prvním načtení pak může checklist fungovat i offline."
+      : "Na iPhonu je pro instalaci a offline režim potřeba HTTPS. Jakmile aplikaci otevřete přes zabezpečenou adresu v Safari, použijte Sdílet a „Přidat na plochu“.";
+    return;
+  }
+
+  if (!isSecure && location.hostname !== "localhost" && location.hostname !== "127.0.0.1") {
+    els.installCard.hidden = false;
+    els.installButton.hidden = true;
+    els.installText.textContent = "Instalace i offline režim vyžadují zabezpečené HTTPS připojení. Otevřete aplikaci přes HTTPS nebo ji nasaďte například na Vercel.";
+    return;
   }
 
   window.addEventListener("beforeinstallprompt", (event) => {
