@@ -15,6 +15,23 @@
   <title>Svatbíto</title>
 </head>
 <body>
+  <div class="startup-screen" id="startupScreen" hidden>
+    <div class="startup-card">
+      <p class="eyebrow">První nastavení</p>
+      <h1>Svatbíto</h1>
+      <p class="startup-text">Nejdřív nastavíme termín svatby a plánovaný rozpočet. Potom už se otevře celý přehled příprav s předvyplněnými hodnotami.</p>
+      <form id="startupForm" class="startup-form">
+        <label for="startupWeddingDate">Termín svatby</label>
+        <input id="startupWeddingDate" type="date" required>
+
+        <label for="startupBudgetTotal">Plánovaný rozpočet</label>
+        <input id="startupBudgetTotal" type="number" min="0" step="1" inputmode="numeric" required placeholder="Například 250000">
+
+        <button class="button button--primary button--full" type="submit">Pokračovat do aplikace</button>
+      </form>
+    </div>
+  </div>
+
   <div class="app-shell">
     <header class="hero">
       <div class="hero__content">
@@ -40,6 +57,9 @@
             <div class="prep-badge">
               <span class="prep-badge__label">Příprava svatby</span>
               <strong id="overallProgress">0 %</strong>
+              <div class="prep-badge__progress">
+                <div class="prep-badge__bar" id="overallBar"></div>
+              </div>
             </div>
             <svg class="rings-illustration" viewBox="0 0 420 320" role="presentation" aria-hidden="true">
               <defs>

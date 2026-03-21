@@ -31,7 +31,56 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+body.has-startup-screen {
+  overflow: hidden;
+}
+
 button, input, textarea, select { font: inherit; }
+
+.startup-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+  background:
+    radial-gradient(circle at top left, rgba(244, 198, 210, 0.5), transparent 34%),
+    radial-gradient(circle at top right, rgba(220, 245, 233, 0.4), transparent 28%),
+    linear-gradient(180deg, rgba(255,250,246,0.98) 0%, rgba(255,244,234,0.98) 100%);
+  backdrop-filter: blur(8px);
+}
+
+.startup-card {
+  width: min(100%, 520px);
+  padding: 1.4rem;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(255,255,255,0.8);
+  box-shadow: var(--shadow);
+}
+
+.startup-card h1 {
+  margin: 0.2rem 0 0;
+  font-size: clamp(2.1rem, 7vw, 3.4rem);
+}
+
+.startup-text {
+  margin: 0.85rem 0 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.startup-form {
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 1.2rem;
+}
+
+.startup-form label {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
 
 .app-shell {
   width: min(100%, 1180px);
@@ -81,16 +130,17 @@ button, input, textarea, select { font: inherit; }
 
 .brand-mark::before {
   content: "";
-  width: 0.9em;
-  height: 0.9em;
-  border-radius: 50% 50% 48% 48%;
+  width: 1em;
+  height: 1em;
+  border-radius: 46% 46% 52% 52%;
   background:
     radial-gradient(circle at 35% 35%, rgba(255,255,255,0.92), rgba(255,255,255,0) 36%),
-    linear-gradient(145deg, #f8d88d, #d8a141 52%, #fff1c2);
+    linear-gradient(145deg, #f7d98a, #d8a141 50%, #fff3cb);
   box-shadow:
     0 0 0 4px rgba(255, 246, 219, 0.68),
     0 10px 18px rgba(202, 141, 55, 0.24);
   transform: rotate(-18deg);
+  clip-path: path("M 32 2 C 16 2 4 14 4 30 C 4 50 21 62 32 74 C 43 62 60 50 60 30 C 60 14 48 2 32 2 Z");
 }
 
 .hero__text {
@@ -238,6 +288,23 @@ button, input, textarea, select { font: inherit; }
   display: block;
   margin-top: 0.2rem;
   font-size: clamp(1.7rem, 5vw, 2.4rem);
+}
+
+.prep-badge__progress {
+  width: 100%;
+  height: 10px;
+  margin-top: 0.7rem;
+  border-radius: 999px;
+  background: rgba(147, 193, 126, 0.18);
+  overflow: hidden;
+}
+
+.prep-badge__bar {
+  width: 0%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #85c66b, #4bb56f);
+  transition: width 0.28s ease;
 }
 
 .rings-illustration {

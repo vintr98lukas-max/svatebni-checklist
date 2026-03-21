@@ -3,8 +3,6 @@ const WEDDING_DATE_KEY = "svatebni-koordinace-wedding-date";
 const BUDGET_KEY = "svatebni-koordinace-budget";
 
 const DEFAULT_TASKS = [
-  { id: "budget", title: "Stanovit celkový rozpočet", category: "Plánování", description: "Ujasněte si rozpočet na hostinu, oblečení, dekorace, hudbu i rezervy.", notes: "", done: false, cost: 0 },
-  { id: "date", title: "Vybrat datum svatby", category: "Plánování", description: "Zvolte termín, který sedí vám, rodině i dostupnosti dodavatelů.", notes: "", done: false, cost: 0 },
   { id: "venue", title: "Zarezervovat místo obřadu a hostiny", category: "Místo", description: "Potvrďte lokaci, čas i počet hostů, které místo zvládne.", notes: "", done: false, cost: 0 },
   { id: "guests", title: "Připravit seznam hostů", category: "Hosté", description: "Sepište hosty a průběžně sledujte potvrzení účasti.", notes: "", done: false, cost: 0 },
   { id: "invitations", title: "Objednat nebo vytvořit pozvánky", category: "Hosté", description: "Připravte text, design a plán rozeslání pozvánek.", notes: "", done: false, cost: 0 },
@@ -50,7 +48,12 @@ const els = {
   newTitle: document.querySelector("#newTitle"),
   newCategory: document.querySelector("#newCategory"),
   newDescription: document.querySelector("#newDescription"),
+  startupScreen: document.querySelector("#startupScreen"),
+  startupForm: document.querySelector("#startupForm"),
+  startupWeddingDate: document.querySelector("#startupWeddingDate"),
+  startupBudgetTotal: document.querySelector("#startupBudgetTotal"),
   overallProgress: document.querySelector("#overallProgress"),
+  overallBar: document.querySelector("#overallBar"),
   toggleSelectedButton: document.querySelector("#toggleSelectedButton"),
   scrollToAddButton: document.querySelector("#scrollToAddButton"),
   addTaskSection: document.querySelector("#addTaskSection"),
@@ -76,6 +79,7 @@ function init() {
   fillFilterOptions();
   bindEvents();
   render();
+  renderStartup();
   registerServiceWorker();
 }
 
@@ -84,15 +88,17 @@ function loadTasks() {
   if (!saved) return structuredClone(DEFAULT_TASKS);
 
   try {
-    return JSON.parse(saved).map((task) => ({
-      id: task.id || crypto.randomUUID(),
-      title: task.title || "Bez názvu",
-      category: task.category || "Vlastní",
-      description: task.description || "Vlastní úkol doplněný do svatební koordinace.",
-      notes: task.notes || "",
-      done: Boolean(task.done),
-      cost: normalizeMoney(task.cost)
-    }));
+    return JSON.parse(saved)
+      .filter((task) => (task.category || "") !== "Plánování")
+      .map((task) => ({
+        id: task.id || crypto.randomUUID(),
+        title: task.title || "Bez názvu",
+        category: task.category || "Vlastní",
+        description: task.description || "Vlastní úkol doplněný do svatební koordinace.",
+        notes: task.notes || "",
+        done: Boolean(task.done),
+        cost: normalizeMoney(task.cost)
+      }));
   } catch {
     return structuredClone(DEFAULT_TASKS);
   }
@@ -209,6 +215,20 @@ function bindEvents() {
     saveBudget();
     renderBudget();
   });
+
+  els.startupForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const dateValue = els.startupWeddingDate.value;
+    const budgetValue = normalizeMoney(els.startupBudgetTotal.value);
+    if (!dateValue) return;
+
+    state.weddingDate = dateValue;
+    state.budget.total = budgetValue;
+    saveWeddingDate();
+    saveBudget();
+    render();
+    renderStartup();
+  });
 }
 
 function fillFilterOptions() {
@@ -300,6 +320,7 @@ function renderStats() {
   const overallPercent = total ? Math.round((done / total) * 100) : 0;
 
   els.overallProgress.textContent = `${overallPercent} %`;
+  els.overallBar.style.width = `${overallPercent}%`;
 }
 
 function renderCountdown() {
@@ -363,6 +384,17 @@ function renderBudget() {
   } else {
     els.budgetStatusText.textContent = `Rozpočet je překročen o ${formatCurrency(Math.abs(remaining))}.`;
   }
+}
+
+function renderStartup() {
+  const needsStartup = !state.weddingDate || !state.budget.total;
+  els.startupScreen.hidden = !needsStartup;
+  document.body.classList.toggle("has-startup-screen", needsStartup);
+
+  if (!needsStartup) return;
+
+  els.startupWeddingDate.value = state.weddingDate;
+  els.startupBudgetTotal.value = state.budget.total || "";
 }
 
 function toggleTaskDone(task) {
