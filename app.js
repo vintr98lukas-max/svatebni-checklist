@@ -1,6 +1,7 @@
 const STORAGE_KEY = "svatebni-koordinace-pwa-v2";
 const WEDDING_DATE_KEY = "svatebni-koordinace-wedding-date";
 const BUDGET_KEY = "svatebni-koordinace-budget";
+const SETUP_DONE_KEY = "svatbito-setup-done-v2";
 
 const DEFAULT_TASKS = [
   { id: "venue", title: "Zarezervovat místo obřadu a hostiny", category: "Místo", description: "Potvrďte lokaci, čas i počet hostů, které místo zvládne.", notes: "", done: false, cost: 0 },
@@ -135,11 +136,11 @@ function saveBudget() {
 }
 
 function loadSetupDone() {
-  return localStorage.getItem("svatbito-setup-done") === "true";
+  return localStorage.getItem(SETUP_DONE_KEY) === "true";
 }
 
 function saveSetupDone() {
-  localStorage.setItem("svatbito-setup-done", state.setupDone ? "true" : "false");
+  localStorage.setItem(SETUP_DONE_KEY, state.setupDone ? "true" : "false");
 }
 
 function bindEvents() {
@@ -357,7 +358,7 @@ function renderBudget() {
 }
 
 function renderStartup() {
-  const needsStartup = !state.setupDone || !state.weddingDate;
+  const needsStartup = !state.setupDone || !state.weddingDate || !state.budget.total;
   els.startupScreen.hidden = !needsStartup;
   document.body.classList.toggle("has-startup-screen", needsStartup);
 

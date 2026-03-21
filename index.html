@@ -129,22 +129,6 @@
       <button class="button button--ghost" id="resetSetupButton" type="button">Znovu nastavit termín a rozpočet</button>
     </section>
 
-    <section class="controls">
-      <div class="filter-group">
-        <label for="categoryFilter">Kategorie</label>
-        <select id="categoryFilter"></select>
-      </div>
-      <div class="filter-group">
-        <label for="statusFilter">Stav</label>
-        <select id="statusFilter">
-          <option value="all">Vše</option>
-          <option value="open">Zbývá</option>
-          <option value="done">Hotovo</option>
-        </select>
-      </div>
-      <button class="button button--secondary button--full" id="resetFiltersButton" type="button">Resetovat filtry</button>
-    </section>
-
     <section class="quick-actions">
       <button class="button button--primary" id="toggleSelectedButton" type="button">Přepnout stav vybraného</button>
       <button class="button button--ghost" id="scrollToAddButton" type="button">Přidat nový úkol</button>
@@ -156,6 +140,21 @@
           <h2>Seznam úkolů</h2>
           <p id="taskCountText">0 položek</p>
         </div>
+        <section class="controls controls--inside">
+          <div class="filter-group">
+            <label for="categoryFilter">Kategorie</label>
+            <select id="categoryFilter"></select>
+          </div>
+          <div class="filter-group">
+            <label for="statusFilter">Stav</label>
+            <select id="statusFilter">
+              <option value="all">Vše</option>
+              <option value="open">Zbývá</option>
+              <option value="done">Hotovo</option>
+            </select>
+          </div>
+          <button class="button button--secondary button--full" id="resetFiltersButton" type="button">Resetovat filtry</button>
+        </section>
         <div class="task-list" id="taskList" aria-live="polite"></div>
       </section>
 
