@@ -28,7 +28,8 @@ const state = {
   selectedId: null,
   filters: { category: "Všechny kategorie", status: "all" },
   weddingDate: loadWeddingDate(),
-  budget: loadBudget()
+  budget: loadBudget(),
+  setupDone: loadSetupDone()
 };
 
 const els = {
@@ -137,6 +138,14 @@ function saveBudget() {
   localStorage.setItem(BUDGET_KEY, JSON.stringify(state.budget));
 }
 
+function loadSetupDone() {
+  return localStorage.getItem("svatbito-setup-done") === "true";
+}
+
+function saveSetupDone() {
+  localStorage.setItem("svatbito-setup-done", state.setupDone ? "true" : "false");
+}
+
 function bindEvents() {
   els.categoryFilter.addEventListener("change", () => {
     state.filters.category = els.categoryFilter.value;
@@ -218,14 +227,17 @@ function bindEvents() {
 
   els.startupForm.addEventListener("submit", (event) => {
     event.preventDefault();
+    if (!els.startupForm.reportValidity()) return;
     const dateValue = els.startupWeddingDate.value;
     const budgetValue = normalizeMoney(els.startupBudgetTotal.value);
     if (!dateValue) return;
 
     state.weddingDate = dateValue;
     state.budget.total = budgetValue;
+    state.setupDone = true;
     saveWeddingDate();
     saveBudget();
+    saveSetupDone();
     render();
     renderStartup();
   });
@@ -387,7 +399,7 @@ function renderBudget() {
 }
 
 function renderStartup() {
-  const needsStartup = !state.weddingDate || !state.budget.total;
+  const needsStartup = !state.setupDone || !state.weddingDate;
   els.startupScreen.hidden = !needsStartup;
   document.body.classList.toggle("has-startup-screen", needsStartup);
 

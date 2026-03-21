@@ -75,11 +75,16 @@ button, input, textarea, select { font: inherit; }
   display: grid;
   gap: 0.8rem;
   margin-top: 1.2rem;
+  justify-items: stretch;
 }
 
 .startup-form label {
   font-size: 0.95rem;
   font-weight: 700;
+}
+
+.startup-form__field {
+  max-width: 100%;
 }
 
 .app-shell {
