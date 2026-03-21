@@ -56,6 +56,7 @@ const els = {
   addTaskSection: document.querySelector("#addTaskSection"),
   taskItemTemplate: document.querySelector("#taskItemTemplate"),
   weddingDateInput: document.querySelector("#weddingDateInput"),
+  weddingDatePicker: document.querySelector("#weddingDatePicker"),
   weddingDateDisplay: document.querySelector("#weddingDateDisplay"),
   countdownHeadline: document.querySelector("#countdownHeadline"),
   countdownText: document.querySelector("#countdownText"),
@@ -310,6 +311,7 @@ function renderCountdown() {
     els.countdownDays.textContent = "--";
     els.weddingDateDisplay.textContent = "Vyberte termín";
     els.weddingDateDisplay.dataset.empty = "true";
+    els.weddingDatePicker.hidden = false;
     return;
   }
 
@@ -327,6 +329,7 @@ function renderCountdown() {
 
   els.weddingDateDisplay.textContent = formattedDate;
   els.weddingDateDisplay.dataset.empty = "false";
+  els.weddingDatePicker.hidden = true;
 
   if (diffDays > 0) {
     els.countdownHeadline.textContent = `Do svatby zbývá ${formatUnit(diffDays, "den", "dny", "dní")}`;

@@ -6,28 +6,27 @@
   <meta name="theme-color" content="#e7657a">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="Svatební koordinace">
-  <meta name="description" content="Elegantní svatební koordinace pro plánování úkolů, termínu a rozpočtu.">
+  <meta name="apple-mobile-web-app-title" content="Svatbíto">
+  <meta name="description" content="Svatbíto pro plánování svatby, termínu a rozpočtu v elegantním přehledu.">
   <link rel="manifest" href="./manifest.json">
   <link rel="apple-touch-icon" href="./icons/icon-180.png">
   <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
   <link rel="stylesheet" href="./styles.css">
-  <title>Svatební koordinace</title>
+  <title>Svatbíto</title>
 </head>
 <body>
   <div class="app-shell">
     <header class="hero">
       <div class="hero__content">
         <p class="eyebrow">By - Fotograf Lukáš Vintr</p>
-        <h1>Svatební koordinace</h1>
+        <h1 class="brand-mark">Svatbíto</h1>
         <p class="hero__text">Naplánujte si svůj velký den přehledně, v&nbsp;klidu a&nbsp;s&nbsp;jistotou, že máte všechny důležité kroky vždy&nbsp;po&nbsp;ruce.</p>
         <div class="hero-tools">
           <div class="hero-tools__copy">
-            <p class="countdown-card__label">Odpočet do svatby</p>
             <h2 id="countdownHeadline">Vyberte datum svého dne</h2>
             <p id="countdownText">Jakmile nastavíte termín, aplikace začne automaticky odpočítávat zbývající dny.</p>
           </div>
-          <label class="button button--secondary countdown-picker" for="weddingDateInput">
+          <label class="button button--secondary countdown-picker" id="weddingDatePicker" for="weddingDateInput">
             <span>Vybrat datum svatby</span>
             <input id="weddingDateInput" type="date">
           </label>
@@ -42,8 +41,52 @@
               <span class="prep-badge__label">Příprava svatby</span>
               <strong id="overallProgress">0 %</strong>
             </div>
-            <div class="ring ring--left"></div>
-            <div class="ring ring--right"></div>
+            <svg class="rings-illustration" viewBox="0 0 420 320" role="presentation" aria-hidden="true">
+              <defs>
+                <linearGradient id="goldOuter" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#8f6620"/>
+                  <stop offset="18%" stop-color="#f8df97"/>
+                  <stop offset="38%" stop-color="#fff5c9"/>
+                  <stop offset="62%" stop-color="#cf9a31"/>
+                  <stop offset="82%" stop-color="#fff0b3"/>
+                  <stop offset="100%" stop-color="#8e631c"/>
+                </linearGradient>
+                <linearGradient id="goldInner" x1="100%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#7a5315"/>
+                  <stop offset="30%" stop-color="#f3cf77"/>
+                  <stop offset="65%" stop-color="#fff7d5"/>
+                  <stop offset="100%" stop-color="#9c6e1d"/>
+                </linearGradient>
+                <radialGradient id="diamondGlow" cx="50%" cy="48%" r="60%">
+                  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+                  <stop offset="55%" stop-color="#f2faff" stop-opacity="0.8"/>
+                  <stop offset="100%" stop-color="#b7d9ef" stop-opacity="0.15"/>
+                </radialGradient>
+                <filter id="softShadow" x="-20%" y="-20%" width="140%" height="160%">
+                  <feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#a77826" flood-opacity="0.22"/>
+                </filter>
+              </defs>
+              <g filter="url(#softShadow)">
+                <g transform="translate(110 120) rotate(-15)">
+                  <ellipse rx="78" ry="58" fill="none" stroke="url(#goldOuter)" stroke-width="24"/>
+                  <ellipse rx="58" ry="42" fill="none" stroke="url(#goldInner)" stroke-width="5" opacity="0.65"/>
+                  <path d="M -42 -33 C -20 -54, 21 -56, 44 -36" fill="none" stroke="#fff8d9" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+                </g>
+                <g transform="translate(258 154) rotate(18)">
+                  <ellipse rx="82" ry="60" fill="none" stroke="url(#goldOuter)" stroke-width="24"/>
+                  <ellipse rx="62" ry="44" fill="none" stroke="url(#goldInner)" stroke-width="5" opacity="0.7"/>
+                  <path d="M -44 -35 C -17 -57, 24 -54, 47 -31" fill="none" stroke="#fff8d9" stroke-width="5" stroke-linecap="round" opacity="0.75"/>
+                  <g transform="translate(0 -92)">
+                    <path d="M -34 18 L -18 -4 L 18 -4 L 34 18" fill="#fdf5d3" opacity="0.9"/>
+                    <path d="M -24 18 L 0 -42 L 24 18 Z" fill="url(#diamondGlow)" stroke="#d4ecfb" stroke-width="4"/>
+                    <path d="M -18 -4 L 0 12 L 18 -4" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.95"/>
+                    <path d="M 0 -42 L 0 18" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.95"/>
+                    <path d="M -11 -16 L 11 -16" fill="none" stroke="#d8f0fb" stroke-width="3" opacity="0.9"/>
+                    <circle cx="0" cy="-11" r="30" fill="url(#diamondGlow)" opacity="0.45"/>
+                  </g>
+                </g>
+              </g>
+            </svg>
             <div class="date-plaque">
               <span class="date-plaque__label">Datum svatby</span>
               <strong class="date-plaque__value" id="weddingDateDisplay">Vyberte termín</strong>

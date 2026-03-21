@@ -1,4 +1,4 @@
-const CACHE_NAME = "svatebni-koordinace-pwa-v3";
+const CACHE_NAME = "svatbito-pwa-v4";
 const ASSETS = [
   "./",
   "./index.html",

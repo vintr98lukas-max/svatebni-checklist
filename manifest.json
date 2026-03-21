@@ -1,7 +1,7 @@
 {
-  "name": "Svatební koordinace",
-  "short_name": "Koordinace",
-  "description": "Elegantní svatební koordinace pro plánování úkolů, termínu a rozpočtu.",
+  "name": "Svatbíto",
+  "short_name": "Svatbíto",
+  "description": "Svatbíto pro plánování svatby, termínu a rozpočtu v elegantním přehledu.",
   "id": "/",
   "start_url": "/",
   "scope": "/",
