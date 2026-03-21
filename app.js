@@ -53,6 +53,7 @@ const els = {
   startupForm: document.querySelector("#startupForm"),
   startupWeddingDate: document.querySelector("#startupWeddingDate"),
   startupBudgetTotal: document.querySelector("#startupBudgetTotal"),
+  startupContinueButton: document.querySelector("#startupContinueButton"),
   overallProgress: document.querySelector("#overallProgress"),
   overallBar: document.querySelector("#overallBar"),
   toggleSelectedButton: document.querySelector("#toggleSelectedButton"),
@@ -225,22 +226,7 @@ function bindEvents() {
     renderBudget();
   });
 
-  els.startupForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    if (!els.startupForm.reportValidity()) return;
-    const dateValue = els.startupWeddingDate.value;
-    const budgetValue = normalizeMoney(els.startupBudgetTotal.value);
-    if (!dateValue) return;
-
-    state.weddingDate = dateValue;
-    state.budget.total = budgetValue;
-    state.setupDone = true;
-    saveWeddingDate();
-    saveBudget();
-    saveSetupDone();
-    render();
-    renderStartup();
-  });
+  els.startupContinueButton.addEventListener("click", completeStartup);
 }
 
 function fillFilterOptions() {
@@ -407,6 +393,29 @@ function renderStartup() {
 
   els.startupWeddingDate.value = state.weddingDate;
   els.startupBudgetTotal.value = state.budget.total || "";
+}
+
+function completeStartup() {
+  if (!els.startupWeddingDate.value) {
+    els.startupWeddingDate.reportValidity();
+    els.startupWeddingDate.focus();
+    return;
+  }
+
+  if (!els.startupBudgetTotal.value) {
+    els.startupBudgetTotal.reportValidity();
+    els.startupBudgetTotal.focus();
+    return;
+  }
+
+  state.weddingDate = els.startupWeddingDate.value;
+  state.budget.total = normalizeMoney(els.startupBudgetTotal.value);
+  state.setupDone = true;
+  saveWeddingDate();
+  saveBudget();
+  saveSetupDone();
+  render();
+  renderStartup();
 }
 
 function toggleTaskDone(task) {

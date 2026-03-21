@@ -51,6 +51,10 @@ button, input, textarea, select { font: inherit; }
   backdrop-filter: blur(8px);
 }
 
+.startup-screen[hidden] {
+  display: none !important;
+}
+
 .startup-card {
   width: min(100%, 520px);
   padding: 1.4rem;
