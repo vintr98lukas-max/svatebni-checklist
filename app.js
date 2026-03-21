@@ -68,6 +68,7 @@ const els = {
   countdownDays: document.querySelector("#countdownDays"),
   budgetForm: document.querySelector("#budgetForm"),
   budgetTotalInput: document.querySelector("#budgetTotalInput"),
+  resetSetupButton: document.querySelector("#resetSetupButton"),
   budgetTotalDisplay: document.querySelector("#budgetTotalDisplay"),
   budgetSpentSummary: document.querySelector("#budgetSpentSummary"),
   budgetRemainingDisplay: document.querySelector("#budgetRemainingDisplay"),
@@ -227,6 +228,7 @@ function bindEvents() {
   });
 
   els.startupContinueButton.addEventListener("click", completeStartup);
+  els.resetSetupButton.addEventListener("click", reopenStartup);
 }
 
 function fillFilterOptions() {
@@ -415,6 +417,14 @@ function completeStartup() {
   saveBudget();
   saveSetupDone();
   render();
+  renderStartup();
+}
+
+function reopenStartup() {
+  state.setupDone = false;
+  saveSetupDone();
+  els.startupWeddingDate.value = state.weddingDate;
+  els.startupBudgetTotal.value = state.budget.total || "";
   renderStartup();
 }
 
