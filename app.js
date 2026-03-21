@@ -3,26 +3,26 @@ const WEDDING_DATE_KEY = "svatebni-koordinace-wedding-date";
 const BUDGET_KEY = "svatebni-koordinace-budget";
 
 const DEFAULT_TASKS = [
-  { id: "budget", title: "Stanovit celkový rozpočet", category: "Plánování", description: "Ujasněte si rozpočet na hostinu, oblečení, dekorace, hudbu i rezervy.", notes: "", done: false },
-  { id: "date", title: "Vybrat datum svatby", category: "Plánování", description: "Zvolte termín, který sedí vám, rodině i dostupnosti dodavatelů.", notes: "", done: false },
-  { id: "venue", title: "Zarezervovat místo obřadu a hostiny", category: "Místo", description: "Potvrďte lokaci, čas i počet hostů, které místo zvládne.", notes: "", done: false },
-  { id: "guests", title: "Připravit seznam hostů", category: "Hosté", description: "Sepište hosty a průběžně sledujte potvrzení účasti.", notes: "", done: false },
-  { id: "invitations", title: "Objednat nebo vytvořit pozvánky", category: "Hosté", description: "Připravte text, design a plán rozeslání pozvánek.", notes: "", done: false },
-  { id: "attire-bride", title: "Vybrat svatební šaty", category: "Oblečení", description: "Domluvte zkoušky, úpravy a termín vyzvednutí šatů.", notes: "", done: false },
-  { id: "attire-groom", title: "Vybrat oblek a doplňky", category: "Oblečení", description: "Vyřešte oblek, košili, boty i sladění s celkovým stylem svatby.", notes: "", done: false },
-  { id: "rings", title: "Vybrat a objednat prstýnky", category: "Oblečení", description: "Ověřte velikosti, gravírování a termín dodání.", notes: "", done: false },
-  { id: "officiant", title: "Domluvit oddávajícího a dokumenty", category: "Formality", description: "Zkontrolujte všechny potřebné doklady a termíny na úřadě.", notes: "", done: false },
-  { id: "flowers", title: "Objednat květiny a výzdobu", category: "Dekorace", description: "Domluvte kytici, korsáže, slavobránu a dekorace stolu.", notes: "", done: false },
-  { id: "music", title: "Zajistit hudbu nebo DJ", category: "Program", description: "Potvrďte playlist, ozvučení a harmonogram dne.", notes: "", done: false },
-  { id: "photographer", title: "Rezervovat fotografa nebo kameramana", category: "Program", description: "Upřesněte styl focení, seznam momentů a časový plán.", notes: "", done: false },
-  { id: "cake", title: "Objednat svatební dort", category: "Hostina", description: "Vyberte chuť, design, velikost a čas dovezení.", notes: "", done: false },
-  { id: "menu", title: "Doladit menu a nápoje", category: "Hostina", description: "Vyřešte hlavní chod, vegetariánské varianty, dětské porce i pitný režim.", notes: "", done: false },
-  { id: "seating", title: "Připravit zasedací pořádek", category: "Hosté", description: "Rozmyslete stoly, vztahy mezi hosty a usazení rodiny.", notes: "", done: false },
-  { id: "transport", title: "Zajistit dopravu", category: "Logistika", description: "Domluvte auto pro novomanžele, případně dopravu hostů.", notes: "", done: false },
-  { id: "accommodation", title: "Vyřešit ubytování pro hosty", category: "Logistika", description: "Potvrďte pokoje, počty lidí a instrukce k příjezdu.", notes: "", done: false },
-  { id: "timeline", title: "Sepsat harmonogram svatebního dne", category: "Program", description: "Udělejte jasný plán od příprav až po večerní zábavu.", notes: "", done: false },
-  { id: "vows", title: "Připravit slib nebo řeč", category: "Program", description: "Sepište osobní slova, pokud chcete mít vlastní slib.", notes: "", done: false },
-  { id: "emergency", title: "Nachystat svatební pohotovostní balíček", category: "Logistika", description: "Připravte lepicí náplasti, jehlu, nit, kapesníčky, kosmetiku a další jistoty.", notes: "", done: false }
+  { id: "budget", title: "Stanovit celkový rozpočet", category: "Plánování", description: "Ujasněte si rozpočet na hostinu, oblečení, dekorace, hudbu i rezervy.", notes: "", done: false, cost: 0 },
+  { id: "date", title: "Vybrat datum svatby", category: "Plánování", description: "Zvolte termín, který sedí vám, rodině i dostupnosti dodavatelů.", notes: "", done: false, cost: 0 },
+  { id: "venue", title: "Zarezervovat místo obřadu a hostiny", category: "Místo", description: "Potvrďte lokaci, čas i počet hostů, které místo zvládne.", notes: "", done: false, cost: 0 },
+  { id: "guests", title: "Připravit seznam hostů", category: "Hosté", description: "Sepište hosty a průběžně sledujte potvrzení účasti.", notes: "", done: false, cost: 0 },
+  { id: "invitations", title: "Objednat nebo vytvořit pozvánky", category: "Hosté", description: "Připravte text, design a plán rozeslání pozvánek.", notes: "", done: false, cost: 0 },
+  { id: "attire-bride", title: "Vybrat svatební šaty", category: "Oblečení", description: "Domluvte zkoušky, úpravy a termín vyzvednutí šatů.", notes: "", done: false, cost: 0 },
+  { id: "attire-groom", title: "Vybrat oblek a doplňky", category: "Oblečení", description: "Vyřešte oblek, košili, boty i sladění s celkovým stylem svatby.", notes: "", done: false, cost: 0 },
+  { id: "rings", title: "Vybrat a objednat prstýnky", category: "Oblečení", description: "Ověřte velikosti, gravírování a termín dodání.", notes: "", done: false, cost: 0 },
+  { id: "officiant", title: "Domluvit oddávajícího a dokumenty", category: "Formality", description: "Zkontrolujte všechny potřebné doklady a termíny na úřadě.", notes: "", done: false, cost: 0 },
+  { id: "flowers", title: "Objednat květiny a výzdobu", category: "Dekorace", description: "Domluvte kytici, korsáže, slavobránu a dekorace stolu.", notes: "", done: false, cost: 0 },
+  { id: "music", title: "Zajistit hudbu nebo DJ", category: "Program", description: "Potvrďte playlist, ozvučení a harmonogram dne.", notes: "", done: false, cost: 0 },
+  { id: "photographer", title: "Rezervovat fotografa nebo kameramana", category: "Program", description: "Upřesněte styl focení, seznam momentů a časový plán.", notes: "", done: false, cost: 0 },
+  { id: "cake", title: "Objednat svatební dort", category: "Hostina", description: "Vyberte chuť, design, velikost a čas dovezení.", notes: "", done: false, cost: 0 },
+  { id: "menu", title: "Doladit menu a nápoje", category: "Hostina", description: "Vyřešte hlavní chod, vegetariánské varianty, dětské porce i pitný režim.", notes: "", done: false, cost: 0 },
+  { id: "seating", title: "Připravit zasedací pořádek", category: "Hosté", description: "Rozmyslete stoly, vztahy mezi hosty a usazení rodiny.", notes: "", done: false, cost: 0 },
+  { id: "transport", title: "Zajistit dopravu", category: "Logistika", description: "Domluvte auto pro novomanžele, případně dopravu hostů.", notes: "", done: false, cost: 0 },
+  { id: "accommodation", title: "Vyřešit ubytování pro hosty", category: "Logistika", description: "Potvrďte pokoje, počty lidí a instrukce k příjezdu.", notes: "", done: false, cost: 0 },
+  { id: "timeline", title: "Sepsat harmonogram svatebního dne", category: "Program", description: "Udělejte jasný plán od příprav až po večerní zábavu.", notes: "", done: false, cost: 0 },
+  { id: "vows", title: "Připravit slib nebo řeč", category: "Program", description: "Sepište osobní slova, pokud chcete mít vlastní slib.", notes: "", done: false, cost: 0 },
+  { id: "emergency", title: "Nachystat svatební pohotovostní balíček", category: "Logistika", description: "Připravte lepicí náplasti, jehlu, nit, kapesníčky, kosmetiku a další jistoty.", notes: "", done: false, cost: 0 }
 ];
 
 const state = {
@@ -51,20 +51,17 @@ const els = {
   newCategory: document.querySelector("#newCategory"),
   newDescription: document.querySelector("#newDescription"),
   overallProgress: document.querySelector("#overallProgress"),
-  overallBar: document.querySelector("#overallBar"),
   toggleSelectedButton: document.querySelector("#toggleSelectedButton"),
   scrollToAddButton: document.querySelector("#scrollToAddButton"),
   addTaskSection: document.querySelector("#addTaskSection"),
   taskItemTemplate: document.querySelector("#taskItemTemplate"),
   weddingDateInput: document.querySelector("#weddingDateInput"),
-  weddingDateButton: document.querySelector("#weddingDateButton"),
   weddingDateDisplay: document.querySelector("#weddingDateDisplay"),
   countdownHeadline: document.querySelector("#countdownHeadline"),
   countdownText: document.querySelector("#countdownText"),
   countdownDays: document.querySelector("#countdownDays"),
   budgetForm: document.querySelector("#budgetForm"),
   budgetTotalInput: document.querySelector("#budgetTotalInput"),
-  budgetSpentInput: document.querySelector("#budgetSpentInput"),
   budgetTotalDisplay: document.querySelector("#budgetTotalDisplay"),
   budgetSpentSummary: document.querySelector("#budgetSpentSummary"),
   budgetRemainingDisplay: document.querySelector("#budgetRemainingDisplay"),
@@ -92,7 +89,8 @@ function loadTasks() {
       category: task.category || "Vlastní",
       description: task.description || "Vlastní úkol doplněný do svatební koordinace.",
       notes: task.notes || "",
-      done: Boolean(task.done)
+      done: Boolean(task.done),
+      cost: normalizeMoney(task.cost)
     }));
   } catch {
     return structuredClone(DEFAULT_TASKS);
@@ -152,9 +150,7 @@ function bindEvents() {
   els.toggleSelectedButton.addEventListener("click", () => {
     const task = getSelectedTask();
     if (!task) return;
-    task.done = !task.done;
-    saveTasks();
-    render();
+    toggleTaskDone(task);
   });
 
   els.saveNotesButton.addEventListener("click", () => {
@@ -187,7 +183,8 @@ function bindEvents() {
       category: els.newCategory.value.trim() || "Vlastní",
       description: els.newDescription.value.trim() || "Vlastní úkol doplněný do svatební koordinace.",
       notes: "",
-      done: false
+      done: false,
+      cost: 0
     });
 
     state.selectedId = state.tasks[0].id;
@@ -201,19 +198,13 @@ function bindEvents() {
     els.addTaskSection.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
-  els.weddingDateButton.addEventListener("click", openDatePicker);
   els.weddingDateDisplay.addEventListener("click", openDatePicker);
-
-  els.weddingDateInput.addEventListener("change", () => {
-    state.weddingDate = els.weddingDateInput.value;
-    saveWeddingDate();
-    renderCountdown();
-  });
+  els.weddingDateInput.addEventListener("input", handleWeddingDateChange);
+  els.weddingDateInput.addEventListener("change", handleWeddingDateChange);
 
   els.budgetForm.addEventListener("submit", (event) => {
     event.preventDefault();
     state.budget.total = normalizeMoney(els.budgetTotalInput.value);
-    state.budget.spent = normalizeMoney(els.budgetSpentInput.value);
     saveBudget();
     renderBudget();
   });
@@ -273,9 +264,7 @@ function renderTaskList() {
     });
 
     toggleButton.addEventListener("click", () => {
-      task.done = !task.done;
-      saveTasks();
-      render();
+      toggleTaskDone(task);
     });
 
     fragment.append(item);
@@ -309,8 +298,7 @@ function renderStats() {
   const done = state.tasks.filter((task) => task.done).length;
   const overallPercent = total ? Math.round((done / total) * 100) : 0;
 
-  els.overallProgress.textContent = `${done} z ${total}`;
-  els.overallBar.style.width = `${overallPercent}%`;
+  els.overallProgress.textContent = `${overallPercent} %`;
 }
 
 function renderCountdown() {
@@ -357,11 +345,10 @@ function renderCountdown() {
 
 function renderBudget() {
   const total = state.budget.total;
-  const spent = state.budget.spent;
+  const spent = state.tasks.reduce((sum, task) => sum + normalizeMoney(task.cost), 0);
   const remaining = total - spent;
 
   els.budgetTotalInput.value = total || "";
-  els.budgetSpentInput.value = spent || "";
   els.budgetTotalDisplay.textContent = formatCurrency(total);
   els.budgetSpentSummary.textContent = `Utraceno ${formatCurrency(spent)}`;
   els.budgetRemainingDisplay.textContent = formatCurrency(remaining);
@@ -373,6 +360,27 @@ function renderBudget() {
   } else {
     els.budgetStatusText.textContent = `Rozpočet je překročen o ${formatCurrency(Math.abs(remaining))}.`;
   }
+}
+
+function toggleTaskDone(task) {
+  if (!task.done) {
+    const entered = window.prompt(`Kolik jste utratili za splnění úkolu "${task.title}"?`, task.cost ? String(task.cost) : "0");
+    if (entered === null) return;
+    task.cost = normalizeMoney(entered);
+    task.done = true;
+  } else {
+    task.done = false;
+    task.cost = 0;
+  }
+
+  saveTasks();
+  render();
+}
+
+function handleWeddingDateChange() {
+  state.weddingDate = els.weddingDateInput.value;
+  saveWeddingDate();
+  renderCountdown();
 }
 
 function getFilteredTasks() {
@@ -399,6 +407,7 @@ function openDatePicker() {
   if (typeof els.weddingDateInput.showPicker === "function") {
     els.weddingDateInput.showPicker();
   } else {
+    els.weddingDateInput.focus();
     els.weddingDateInput.click();
   }
 }
