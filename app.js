@@ -63,14 +63,8 @@ const els = {
   weddingDateInput: document.querySelector("#weddingDateInput"),
   weddingDatePicker: document.querySelector("#weddingDatePicker"),
   weddingDateDisplay: document.querySelector("#weddingDateDisplay"),
-  countdownHeadline: document.querySelector("#countdownHeadline"),
-  countdownText: document.querySelector("#countdownText"),
   countdownDays: document.querySelector("#countdownDays"),
-  budgetForm: document.querySelector("#budgetForm"),
-  budgetTotalInput: document.querySelector("#budgetTotalInput"),
   resetSetupButton: document.querySelector("#resetSetupButton"),
-  budgetTotalDisplay: document.querySelector("#budgetTotalDisplay"),
-  budgetSpentSummary: document.querySelector("#budgetSpentSummary"),
   budgetRemainingDisplay: document.querySelector("#budgetRemainingDisplay"),
   budgetStatusText: document.querySelector("#budgetStatusText")
 };
@@ -220,13 +214,6 @@ function bindEvents() {
   els.weddingDateInput.addEventListener("input", handleWeddingDateChange);
   els.weddingDateInput.addEventListener("change", handleWeddingDateChange);
 
-  els.budgetForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    state.budget.total = normalizeMoney(els.budgetTotalInput.value);
-    saveBudget();
-    renderBudget();
-  });
-
   els.startupContinueButton.addEventListener("click", completeStartup);
   els.resetSetupButton.addEventListener("click", reopenStartup);
 }
@@ -327,8 +314,6 @@ function renderCountdown() {
   els.weddingDateInput.value = state.weddingDate;
 
   if (!state.weddingDate) {
-    els.countdownHeadline.textContent = "Vyberte datum svého dne";
-    els.countdownText.textContent = "Jakmile nastavíte termín, aplikace začne automaticky odpočítávat zbývající dny.";
     els.countdownDays.textContent = "--";
     els.weddingDateDisplay.textContent = "Vyberte termín";
     els.weddingDateDisplay.dataset.empty = "true";
@@ -352,18 +337,6 @@ function renderCountdown() {
   els.weddingDateDisplay.dataset.empty = "false";
   els.weddingDatePicker.hidden = true;
 
-  if (diffDays > 0) {
-    els.countdownHeadline.textContent = `Do svatby zbývá ${formatUnit(diffDays, "den", "dny", "dní")}`;
-    els.countdownText.textContent = `Velký den připadá na ${formattedDate} a odpočet běží přesně podle nastaveného termínu.`;
-  } else if (diffDays === 0) {
-    els.countdownHeadline.textContent = "Svatební den je právě dnes";
-    els.countdownText.textContent = `Dnes je ${formattedDate}. Užijte si svůj den naplno a bez stresu.`;
-  } else {
-    const elapsed = Math.abs(diffDays);
-    els.countdownHeadline.textContent = `Od svatby uplynulo ${formatUnit(elapsed, "den", "dny", "dní")}`;
-    els.countdownText.textContent = `Svatební den proběhl ${formattedDate}. Koordinace vám může zůstat jako vzpomínka na přípravy.`;
-  }
-
   els.countdownDays.textContent = String(Math.abs(diffDays));
 }
 
@@ -372,17 +345,14 @@ function renderBudget() {
   const spent = state.tasks.reduce((sum, task) => sum + normalizeMoney(task.cost), 0);
   const remaining = total - spent;
 
-  els.budgetTotalInput.value = total || "";
-  els.budgetTotalDisplay.textContent = formatCurrency(total);
-  els.budgetSpentSummary.textContent = `Utraceno ${formatCurrency(spent)}`;
   els.budgetRemainingDisplay.textContent = formatCurrency(remaining);
 
   if (!total) {
-    els.budgetStatusText.textContent = "Zadejte rozpočet a průběžné výdaje.";
+    els.budgetStatusText.textContent = "Rozpočet zatím není nastavený.";
   } else if (remaining >= 0) {
-    els.budgetStatusText.textContent = `V rozpočtu vám zbývá ${formatCurrency(remaining)}.`;
+    els.budgetStatusText.textContent = `Z původního rozpočtu ${formatCurrency(total)} už bylo utraceno ${formatCurrency(spent)}.`;
   } else {
-    els.budgetStatusText.textContent = `Rozpočet je překročen o ${formatCurrency(Math.abs(remaining))}.`;
+    els.budgetStatusText.textContent = `Rozpočet je překročen o ${formatCurrency(Math.abs(remaining))} z původních ${formatCurrency(total)}.`;
   }
 }
 

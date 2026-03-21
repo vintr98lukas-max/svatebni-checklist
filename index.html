@@ -40,8 +40,8 @@
         <p class="hero__text">Naplánujte si svůj velký den přehledně, v&nbsp;klidu a&nbsp;s&nbsp;jistotou, že máte všechny důležité kroky vždy&nbsp;po&nbsp;ruce.</p>
         <div class="hero-tools">
           <div class="hero-tools__copy">
-            <h2 id="countdownHeadline">Vyberte datum svého dne</h2>
-            <p id="countdownText">Jakmile nastavíte termín, aplikace začne automaticky odpočítávat zbývající dny.</p>
+            <h2>Svatba pod kontrolou</h2>
+            <p>Vše důležité máte na jednom místě, od úkolů až po hlídání zbývajícího rozpočtu.</p>
           </div>
           <label class="button button--secondary countdown-picker" id="weddingDatePicker" for="weddingDateInput">
             <span>Vybrat datum svatby</span>
@@ -119,31 +119,14 @@
 
     <section class="stats-grid" aria-label="Přehled postupu a rozpočtu">
       <article class="stat-card">
-        <p>Rozpočet svatby</p>
-        <strong id="budgetTotalDisplay">0 Kč</strong>
-        <span id="budgetSpentSummary">Utraceno 0 Kč</span>
-      </article>
-      <article class="stat-card">
         <p>Zbývá v rozpočtu</p>
         <strong id="budgetRemainingDisplay">0 Kč</strong>
-        <span id="budgetStatusText">Zadejte rozpočet a průběžné výdaje.</span>
+        <span id="budgetStatusText">Hodnota se přenese z úvodního nastavení a postupně se odečítá podle splněných úkolů.</span>
       </article>
     </section>
 
-    <section class="budget-panel">
-      <article class="detail-card">
-        <div class="section-heading">
-          <h2>Rozpočet</h2>
-        </div>
-        <form id="budgetForm" class="budget-form">
-          <div class="filter-group">
-            <label for="budgetTotalInput">Celkový rozpočet</label>
-            <input id="budgetTotalInput" type="number" min="0" step="1" inputmode="numeric" placeholder="Například 250000">
-          </div>
-          <button class="button button--primary button--full" type="submit">Uložit rozpočet</button>
-          <button class="button button--ghost button--full" id="resetSetupButton" type="button">Znovu nastavit termín a rozpočet</button>
-        </form>
-      </article>
+    <section class="quick-actions quick-actions--single">
+      <button class="button button--ghost" id="resetSetupButton" type="button">Znovu nastavit termín a rozpočet</button>
     </section>
 
     <section class="controls">
