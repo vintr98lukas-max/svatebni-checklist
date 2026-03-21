@@ -1,0 +1,182 @@
+[
+  {
+    "Id": "budget",
+    "Title": "Stanovit celkový rozpočet",
+    "Category": "Plánování",
+    "Owner": "Společně",
+    "Description": "Ujasněte si rozpočet na hostinu, oblečení, dekorace, hudbu i rezervy.",
+    "Notes": "",
+    "Done": false
+  },
+  {
+    "Id": "date",
+    "Title": "Vybrat datum svatby",
+    "Category": "Plánování",
+    "Owner": "Společně",
+    "Description": "Zvolte termín, který sedí vám, rodině i dostupnosti dodavatelů.",
+    "Notes": "",
+    "Done": false
+  },
+  {
+    "Id": "venue",
+    "Title": "Zarezervovat místo obřadu a hostiny",
+    "Category": "Místo",
+    "Owner": "Společně",
+    "Description": "Potvrďte lokaci, čas i počet hostů, které místo zvládne.",
+    "Notes": "",
+    "Done": false
+  },
+  {
+    "Id": "guests",
+    "Title": "Připravit seznam hostů",
+    "Category": "Hosté",
+    "Owner": "Společně",
+    "Description": "Sepište hosty a průběžně sledujte potvrzení účasti.",
+    "Notes": "",
+    "Done": false
+  },
+  {
+    "Id": "invitations",
+    "Title": "Objednat nebo vytvořit pozvánky",
+    "Category": "Hosté",
+    "Owner": "Nevěsta",
+    "Description": "Připravte text, design a plán rozeslání pozvánek.",
+    "Notes": "",
+    "Done": false
+  },
+  {
+    "Id": "attire-bride",
+    "Title": "Vybrat svatební šaty",
+    "Category": "Oblečení",
+    "Owner": "Nevěsta",
+    "Description": "Domluvte zkoušky, úpravy a termín vyzvednutí šatů.",
+    "Notes": "",
+    "Done": false
+  },
+  {
+    "Id": "attire-groom",
+    "Title": "Vybrat oblek a doplňky",
+    "Category": "Oblečení",
+    "Owner": "Ženich",
+    "Description": "Vyřešit oblek, košili, boty i sladění s celkovým stylem svatby.",
+    "Notes": "",
+    "Done": false
+  },
+  {
+    "Id": "rings",
+    "Title": "Vybrat a objednat prstýnky",
+    "Category": "Oblečení",
+    "Owner": "Společně",
+    "Description": "Ověřte velikosti, gravírování a termín dodání.",
+    "Notes": "",
+    "Done": false
+  },
+  {
+    "Id": "officiant",
+    "Title": "Domluvit oddávajícího a dokumenty",
+    "Category": "Formality",
+    "Owner": "Společně",
+    "Description": "Zkontrolujte všechny potřebné doklady a termíny na úřadě.",
+    "Notes": "",
+    "Done": false
+  },
+  {
+    "Id": "flowers",
+    "Title": "Objednat květiny a výzdobu",
+    "Category": "Dekorace",
+    "Owner": "Nevěsta",
+    "Description": "Domluvte kytici, korsáže, slavobránu a dekorace stolu.",
+    "Notes": "",
+    "Done": false
+  },
+  {
+    "Id": "music",
+    "Title": "Zajistit hudbu nebo DJ",
+    "Category": "Program",
+    "Owner": "Ženich",
+    "Description": "Potvrďte playlist, ozvučení a harmonogram dne.",
+    "Notes": "",
+    "Done": false
+  },
+  {
+    "Id": "photographer",
+    "Title": "Rezervovat fotografa nebo kameramana",
+    "Category": "Program",
+    "Owner": "Společně",
+    "Description": "Upřesněte styl focení, seznam momentů a časový plán.",
+    "Notes": "",
+    "Done": false
+  },
+  {
+    "Id": "cake",
+    "Title": "Objednat svatební dort",
+    "Category": "Hostina",
+    "Owner": "Společně",
+    "Description": "Vyberte chuť, design, velikost a čas dovezení.",
+    "Notes": "",
+    "Done": false
+  },
+  {
+    "Id": "menu",
+    "Title": "Doladit menu a nápoje",
+    "Category": "Hostina",
+    "Owner": "Společně",
+    "Description": "Vyřešit hlavní chod, vegetariány, dětské porce i pitný režim.",
+    "Notes": "",
+    "Done": false
+  },
+  {
+    "Id": "seating",
+    "Title": "Připravit zasedací pořádek",
+    "Category": "Hosté",
+    "Owner": "Společně",
+    "Description": "Rozmyslete stoly, vztahy mezi hosty a usazení rodiny.",
+    "Notes": "",
+    "Done": false
+  },
+  {
+    "Id": "transport",
+    "Title": "Zajistit dopravu",
+    "Category": "Logistika",
+    "Owner": "Ženich",
+    "Description": "Domluvte auto pro novomanžele, případně dopravu hostů.",
+    "Notes": "",
+    "Done": false
+  },
+  {
+    "Id": "accommodation",
+    "Title": "Vyřešit ubytování pro hosty",
+    "Category": "Logistika",
+    "Owner": "Společně",
+    "Description": "Potvrďte pokoje, počty lidí a instrukce k příjezdu.",
+    "Notes": "",
+    "Done": false
+  },
+  {
+    "Id": "timeline",
+    "Title": "Sepsat harmonogram svatebního dne",
+    "Category": "Program",
+    "Owner": "Společně",
+    "Description": "Udělejte jasný plán od příprav až po večerní zábavu.",
+    "Notes": "",
+    "Done": false
+  },
+  {
+    "Id": "vows",
+    "Title": "Připravit slib nebo řeč",
+    "Category": "Program",
+    "Owner": "Nevěsta",
+    "Description": "Sepište osobní slova, pokud chcete mít vlastní slib.",
+    "Notes": "",
+    "Done": false
+  },
+  {
+    "Id": "emergency",
+    "Title": "Nachystat svatební pohotovostní balíček",
+    "Category": "Logistika",
+    "Owner": "Nevěsta",
+    "Description": "Lepicí náplasti, jehlu, nit, kapesníčky, kosmetiku a další jistoty.",
+    "Notes": "",
+    "Done": false
+  }
+]

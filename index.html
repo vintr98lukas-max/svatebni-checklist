@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#e7657a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Svatební checklist">
+  <meta name="description" content="Mobilní svatební checklist pro nevěstu a ženicha.">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" href="./icons/icon-180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Svatební checklist</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="hero">
+      <div class="hero__content">
+        <p class="eyebrow">Svatba na pohodu</p>
+        <h1>Svatební checklist</h1>
+        <p class="hero__text">Mobile-first přehled úkolů pro nevěstu a ženicha. Velká tlačítka, rychlé odškrtávání a poznámky vždy po ruce.</p>
+        <div class="hero__badges" aria-hidden="true">
+          <span class="badge badge--pink">Nevěsta</span>
+          <span class="badge badge--gold">Společně</span>
+          <span class="badge badge--mint">Ženich</span>
+        </div>
+      </div>
+      <div class="hero__art" aria-hidden="true">
+        <div class="art-card art-card--back"></div>
+        <div class="art-card art-card--front">
+          <div class="heart"></div>
+          <div class="rings">
+            <span></span>
+            <span></span>
+          </div>
+          <div class="bouquet">
+            <i></i><i></i><i></i><i></i>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="install-card" id="installCard" hidden>
+      <div>
+        <h2>Přidat na plochu</h2>
+        <p id="installText">Nainstalujte si aplikaci pro rychlý přístup i offline.</p>
+      </div>
+      <button class="button button--primary" id="installButton" type="button">Nainstalovat</button>
+    </section>
+
+    <section class="stats-grid" aria-label="Přehled postupu">
+      <article class="stat-card stat-card--highlight">
+        <p>Celkem hotovo</p>
+        <strong id="overallProgress">0 z 0</strong>
+        <div class="progress">
+          <div class="progress__bar" id="overallBar"></div>
+        </div>
+      </article>
+      <article class="stat-card">
+        <p>Nevěsta</p>
+        <strong id="brideProgress">0 %</strong>
+        <span id="brideSummary">0 z 0 úkolů</span>
+      </article>
+      <article class="stat-card">
+        <p>Ženich</p>
+        <strong id="groomProgress">0 %</strong>
+        <span id="groomSummary">0 z 0 úkolů</span>
+      </article>
+    </section>
+
+    <section class="controls">
+      <div class="filter-group">
+        <label for="ownerFilter">Kdo</label>
+        <select id="ownerFilter"></select>
+      </div>
+      <div class="filter-group">
+        <label for="categoryFilter">Kategorie</label>
+        <select id="categoryFilter"></select>
+      </div>
+      <div class="filter-group">
+        <label for="statusFilter">Stav</label>
+        <select id="statusFilter">
+          <option value="all">Vše</option>
+          <option value="open">Zbývá</option>
+          <option value="done">Hotovo</option>
+        </select>
+      </div>
+      <button class="button button--secondary button--full" id="resetFiltersButton" type="button">Resetovat filtry</button>
+    </section>
+
+    <section class="quick-actions">
+      <button class="button button--primary" id="toggleSelectedButton" type="button">Přepnout stav vybraného</button>
+      <button class="button button--ghost" id="scrollToAddButton" type="button">Přidat nový úkol</button>
+    </section>
+
+    <main class="content">
+      <section class="task-section">
+        <div class="section-heading">
+          <h2>Seznam úkolů</h2>
+          <p id="taskCountText">0 položek</p>
+        </div>
+        <div class="task-list" id="taskList" aria-live="polite"></div>
+      </section>
+
+      <aside class="detail-panel">
+        <section class="detail-card">
+          <div class="section-heading">
+            <h2>Detail úkolu</h2>
+            <p id="selectedStatus">Vyberte úkol</p>
+          </div>
+          <h3 id="detailTitle">Vyberte úkol ze seznamu</h3>
+          <p class="detail-meta" id="detailMeta"></p>
+          <p class="detail-description" id="detailDescription">Tady se zobrazí popis a poznámky k vybranému úkolu.</p>
+          <label class="notes-label" for="notesInput">Poznámky</label>
+          <textarea id="notesInput" rows="5" placeholder="Sem si můžete napsat termín, kontakt nebo rozpočet..."></textarea>
+          <div class="detail-actions">
+            <button class="button button--primary" id="saveNotesButton" type="button">Uložit poznámku</button>
+            <button class="button button--danger" id="deleteTaskButton" type="button">Smazat úkol</button>
+          </div>
+        </section>
+
+        <section class="detail-card" id="addTaskSection">
+          <div class="section-heading">
+            <h2>Přidat vlastní úkol</h2>
+            <p>Rychlé doplnění dalších příprav</p>
+          </div>
+          <form id="taskForm" class="task-form">
+            <label for="newTitle">Název úkolu</label>
+            <input id="newTitle" name="title" type="text" required placeholder="Například rezervace vizážistky">
+
+            <label for="newCategory">Kategorie</label>
+            <input id="newCategory" name="category" type="text" placeholder="Například Krása">
+
+            <label for="newOwner">Na starosti</label>
+            <select id="newOwner" name="owner">
+              <option value="Nevěsta">Nevěsta</option>
+              <option value="Ženich">Ženich</option>
+              <option value="Společně" selected>Společně</option>
+            </select>
+
+            <label for="newDescription">Popis</label>
+            <textarea id="newDescription" name="description" rows="4" placeholder="Krátký popis, co je potřeba zařídit."></textarea>
+
+            <button class="button button--primary button--full" type="submit">Přidat úkol</button>
+          </form>
+        </section>
+      </aside>
+    </main>
+  </div>
+
+  <template id="taskItemTemplate">
+    <article class="task-item">
+      <button class="task-item__main" type="button">
+        <span class="task-item__check" aria-hidden="true"></span>
+        <span class="task-item__content">
+          <strong class="task-item__title"></strong>
+          <span class="task-item__meta"></span>
+        </span>
+      </button>
+      <button class="task-item__toggle" type="button"></button>
+    </article>
+  </template>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>
