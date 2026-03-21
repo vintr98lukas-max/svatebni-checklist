@@ -30,7 +30,8 @@ const state = {
   filters: { category: "Všechny kategorie", status: "all" },
   weddingDate: loadWeddingDate(),
   budget: loadBudget(),
-  setupDone: loadSetupDone()
+  setupDone: loadSetupDone(),
+  startupOpen: true
 };
 
 const els = {
@@ -351,7 +352,7 @@ function renderBudget() {
 }
 
 function renderStartup() {
-  const needsStartup = !state.setupDone || !state.weddingDate || !state.budget.total;
+  const needsStartup = state.startupOpen;
   els.startupScreen.hidden = !needsStartup;
   document.body.classList.toggle("has-startup-screen", needsStartup);
 
@@ -377,6 +378,7 @@ function completeStartup() {
   state.weddingDate = els.startupWeddingDate.value;
   state.budget.total = normalizeMoney(els.startupBudgetTotal.value);
   state.setupDone = true;
+  state.startupOpen = false;
   saveWeddingDate();
   saveBudget();
   saveSetupDone();
@@ -386,6 +388,7 @@ function completeStartup() {
 
 function reopenStartup() {
   state.setupDone = false;
+  state.startupOpen = true;
   saveSetupDone();
   els.startupWeddingDate.value = state.weddingDate;
   els.startupBudgetTotal.value = state.budget.total || "";
