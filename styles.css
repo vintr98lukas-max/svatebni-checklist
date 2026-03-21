@@ -498,7 +498,6 @@ textarea {
 .task-item__main {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
   padding: 1rem;
   background: linear-gradient(180deg, #ffffff, #f7faff);
   border: 1px solid var(--line);
@@ -506,33 +505,6 @@ textarea {
 }
 
 .task-item__main.is-selected { outline: 2px solid rgba(61, 120, 201, 0.34); }
-
-.task-item__check {
-  flex: 0 0 26px;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  border: 2px solid #9dbce8;
-  position: relative;
-  background: #fff7f8;
-}
-
-.task-item--done .task-item__check {
-  background: linear-gradient(135deg, #3d78c9, #79a8e6);
-  border-color: transparent;
-}
-
-.task-item--done .task-item__check::after {
-  content: "";
-  position: absolute;
-  left: 7px;
-  top: 4px;
-  width: 7px;
-  height: 12px;
-  border-right: 3px solid white;
-  border-bottom: 3px solid white;
-  transform: rotate(40deg);
-}
 
 .task-item__content {
   display: grid;

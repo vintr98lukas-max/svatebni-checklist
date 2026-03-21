@@ -57,7 +57,6 @@ const els = {
   startupContinueButton: document.querySelector("#startupContinueButton"),
   overallProgress: document.querySelector("#overallProgress"),
   overallBar: document.querySelector("#overallBar"),
-  toggleSelectedButton: document.querySelector("#toggleSelectedButton"),
   scrollToAddButton: document.querySelector("#scrollToAddButton"),
   addTaskSection: document.querySelector("#addTaskSection"),
   taskItemTemplate: document.querySelector("#taskItemTemplate"),
@@ -158,12 +157,6 @@ function bindEvents() {
     state.filters = { category: "Všechny kategorie", status: "all" };
     fillFilterOptions();
     renderTaskList();
-  });
-
-  els.toggleSelectedButton.addEventListener("click", () => {
-    const task = getSelectedTask();
-    if (!task) return;
-    toggleTaskDone(task);
   });
 
   els.saveNotesButton.addEventListener("click", () => {
