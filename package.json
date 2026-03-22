@@ -1,0 +1,11 @@
+{
+  "name": "healthy-lifestyle-gamification-app",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "install:all": "npm --prefix client install",
+    "dev": "npm --prefix client run dev",
+    "build": "npm --prefix client install && npm --prefix client run build",
+    "start": "npm --prefix client run preview"
+  }
+}
